@@ -1,32 +1,33 @@
-<ion-header>
+
   <ion-toolbar>
-    <ion-title>Register</ion-title>
+   
   </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
 
     <ion-list>
-
+      <img src="assets/icon/icon.png" style="display:block;width:20%;height:20%;margin-left:auto;margin-right:auto;" />
+      <h4 id="page-heading1" style="color:#000000;text-align:center;">Giderim Cepte</h4>
         <ion-item>
             <ion-label position="floating">Username</ion-label>
-            <ion-input type="text" [(ngModel)]="username"></ion-input>
+            <ion-input placeholder="abc123" type="text" [(ngModel)]="username"></ion-input>
           </ion-item>
         
           <ion-item>
             <ion-label position="floating" >Password</ion-label>
-            <ion-input type="password" [(ngModel)]="password"></ion-input>
+            <ion-input placeholder="123456" type="password" [(ngModel)]="password"></ion-input>
           </ion-item>
 
           <ion-item>
               <ion-label position="floating" >Confirm Password</ion-label>
-              <ion-input type="password" [(ngModel)]="conpassword"></ion-input>
+              <ion-input placeholder="123456" type="password" [(ngModel)]="conpassword"></ion-input>
             </ion-item>
   
     </ion-list>
   
-    <ion-button color="dark" fill="solid" expand="block" (click)="register()">Sign Up</ion-button>
-    <ion-button color="dark" fill="solid" expand="block" [routerLink]="['/login']">Back</ion-button>
+    <ion-button color="success" fill="solid" expand="block" (click)="register()"><ion-icon name="person-add"></ion-icon>Sign Up</ion-button>
+    <ion-button color="danger" fill="solid" expand="block" [routerLink]="['/login']"><ion-icon name="arrow-back"></ion-icon>Back</ion-button>
 
     
 
