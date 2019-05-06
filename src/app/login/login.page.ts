@@ -35,4 +35,11 @@ export class LoginPage implements OnInit {
       console.log(res);
     })
   }
+
+  logingoogle(){
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then(res=> {
+      console.log(res);
+    })
+  }
 }
