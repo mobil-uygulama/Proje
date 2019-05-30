@@ -1,0 +1,36 @@
+
+  <ion-toolbar>
+   
+  </ion-toolbar>
+
+
+<ion-content>
+
+  <ion-list>
+    <img src="assets/icon/icon.png" style="display:block;width:20%;height:20%;margin-left:auto;margin-right:auto;" />
+    <h4 id="page-heading1" style="color:#000000;text-align:center;">Giderim Cepte</h4>
+      <ion-item>
+          <ion-label    position="stacked" color="dark"><p class="labelclass">Username</p></ion-label>
+          <ion-input type="text" placeholder="abc123@gmail.com" [(ngModel)]="username"></ion-input>
+        </ion-item>
+   
+  
+        <ion-item>
+          <ion-label   position="stacked" color="dark"><p class="labelclass">Password</p></ion-label>
+          <ion-input type="password" placeholder="abc123" [(ngModel)]="password"></ion-input>
+        </ion-item>
+
+  </ion-list>
+
+
+  <ion-button color="success" fill="solid" expand="block"  (click)="login()"><ion-icon name="log-in"></ion-icon> Login</ion-button>
+  <ion-button color="primary" fill="solid" expand="block" (click)="loginfacebook()"><ion-icon name="logo-facebook"></ion-icon> Login With Facebook</ion-button>
+  <ion-button color="danger" fill="solid" expand="block" (click)="logingoogle()"><ion-icon name="logo-googleplus"></ion-icon> Login With Google</ion-button>
+  <ion-label  color="dark"><p class="label">Don't Have an Account ?</p></ion-label>
+  <ion-button class="input" color="dark" fill="solid"  [routerLink]="['/register']"><ion-icon name="person-add"></ion-icon> Register</ion-button>
+<div>
+  <ion-button fill="clear" expand="full" (click)="forgotpassword()">Forgot Password</ion-button>
+</div>
+
+  
+</ion-content>

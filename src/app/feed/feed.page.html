@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>feed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <div id="images" *ngIf="posts">
+        <div class="image" *ngFor="let post of posts">
+          <img (click)="goTo(post)" class="main-image" src="https://ucarecdn.com/{{ post }}/-/scale_crop/150x150/center/" />
+        </div>
+      </div>
+
+</ion-content>
