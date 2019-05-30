@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/auth'
-import {auth} from 'firebase/app'
-import { AlertController } from '@ionic/angular'
-import {Router} from '@angular/router' 
+import { AngularFireAuth } from '@angular/fire/auth'
+import { auth } from 'firebase/app'
+
+import { AngularFirestore } from '@angular/fire/firestore'
+import { UserService } from '../user.service';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-register',
@@ -16,7 +19,13 @@ export class RegisterPage implements OnInit {
   conpassword: string =""
 
 
-  constructor(public afAuth: AngularFireAuth,public AlertCon: AlertController,public router: Router) { }
+  constructor(
+		public afAuth: AngularFireAuth,
+		public afstore: AngularFirestore,
+		public user: UserService,
+		public AlertCon: AlertController,
+		public router: Router
+		) { }
 
   ngOnInit() {
   }
@@ -35,8 +44,18 @@ export class RegisterPage implements OnInit {
 
       try {
         const res=await this.afAuth.auth.createUserWithEmailAndPassword(username + '@gmail.com',password)
+        this.afstore.doc(`users/${res.user.uid}`).set({
+          username
+        })
+  
+        this.user.setUser({
+          username,
+          uid: res.user.uid
+        })
+  
         this.alertshow("Success","Succesful")
-        this.router.navigate(['/login'])
+        this.router.navigate(['/tabs'])
+        
       } catch (error) {
         this.alertshow("Error",error.message)
       }

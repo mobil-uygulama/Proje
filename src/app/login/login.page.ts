@@ -4,7 +4,8 @@ import {auth} from 'firebase/app'
 import * as firebase from 'firebase/app';
 import { AlertController } from '@ionic/angular'
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
-
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,19 +20,32 @@ export class LoginPage implements OnInit {
 
   
 
-  constructor( public afAuth : AngularFireAuth,public AlertCon: AlertController) { }
+  constructor( public afAuth : AngularFireAuth,public AlertCon: AlertController,public user: UserService,public router: Router) { }
 
   ngOnInit() {
   }
 
-  async login(){
-    const {username , password} = this
-    try {
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@gmail.com',password)
-    } catch (error) {
-      console.dir(error)
-    }
-  }
+  async login() {
+		const { username, password } = this
+		try {
+	
+			const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@gmail.com', password)
+			
+			if(res.user) {
+				this.user.setUser({
+					username,
+					uid: res.user.uid
+				})
+				this.router.navigate(['/tabs'])
+			}
+		
+		} catch(err) {
+			console.dir(err)
+			if(err.code === "auth/user-not-found") {
+				console.log("User not found")
+			}
+		}
+	}
 
   async forgotpassword(){
     const alert = await this.AlertCon.create({
@@ -68,12 +82,15 @@ export class LoginPage implements OnInit {
     .then(res=> {
       console.log(res);
     })
+    this.router.navigate(['/tabs'])
   }
 
   logingoogle(){
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+   const asd = this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .then(res=> {
       console.log(res);
     })
+
+      this.router.navigate(['/tabs'])
   }
 }
