@@ -16,7 +16,7 @@ import { UserService } from './user.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { ShareModule } from './share.module';
-
+import { FirestoreSettingsToken } from '@angular/fire/firestore';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -35,7 +35,8 @@ import { ShareModule } from './share.module';
     SplashScreen,
 	{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 	UserService,
-	AuthService
+	AuthService,
+	{ provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })
